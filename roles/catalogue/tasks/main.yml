@@ -1,3 +1,5 @@
+# while running yml files please make sure to use correct spellings and case sensitive words correctly.
+
 - name: Configure NodeJS repos
   ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
 
@@ -42,5 +44,11 @@
     daemon_reload: yes
     state: restarted
     enabled: yes
+
+- name: load schema
+  community.mongodb.mongodb_shell:
+    login_host: mongodb-dev.sampathkumar.online
+    file: "/app/schema/catalogue.js"
+    idempotent: yes
 
 
