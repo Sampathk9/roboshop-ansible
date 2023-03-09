@@ -42,7 +42,7 @@
     name: mysql-community-server
     state: installed
 
-# name inside the module has to be the service name can't give a random name for that but for intial name we can give our wish
+# name inside the module has to be the service name can't give a random name for that but for initial name we can give our wish
 - name: Start Mysql
   ansible.builtin.systemd:
     name: mysqld
