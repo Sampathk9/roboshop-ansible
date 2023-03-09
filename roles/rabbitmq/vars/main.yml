@@ -1,0 +1,2 @@
+#component value here will act as a parameter to common file {{component}}
+component: rabbitmq
