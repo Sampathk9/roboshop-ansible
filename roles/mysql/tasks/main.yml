@@ -1,0 +1,53 @@
+#source common.sh
+#
+#if [ -z "${root_mysql_password}" ]; then
+#echo "variable root_mysql_password is missing"
+#exit
+#fi
+#
+#print_head " Disable Mysql"
+#dnf module disable mysql -y &>>${LOG}
+#status_check
+#
+#print_head "copy Mysql Repo file"
+#cp ${script_location}/Files/mysql.repo /etc/yum.repos.d/mysql.repo &>>${LOG}
+#status_check
+#
+#print_head "Install My Sql Server"
+#yum install mysql-community-server -y &>>${LOG}
+#status_check
+#
+#print_head "Enable Mysql"
+#systemctl enable mysqld &>>${LOG}
+#status_check
+#
+#print_head "Start Mysql"
+#systemctl restart mysqld &>>${LOG}
+#status_check
+#
+#print_head "Reset Default Database Password"
+#mysql_secure_installation --set-root-pass ${root_mysql_password} &>>${LOG}
+#status_check
+
+- name: Disable MySql & Version
+  ansible.builtin.shell: dnf module disable mysql -y
+
+- name: Copy Mysql Repo file
+  ansible.builtin.copy:
+    src: mysql.repo
+    dest: /etc/yum.repos.d/mysql.repo
+
+- name: Install Mysql server
+  ansible.builtin.yum:
+    name: mysql-community-server
+    state: installed
+
+# name inside the module has to be the service name can't give a random name for that but for intial name we can give our wish
+- name: Start Mysql
+  ansible.builtin.systemd:
+    name: mysqld
+    state: restarted
+    enabled: yes
+
+- name: Restart MySql Default Password
+  ansible.builtin.shell: mysql_secure_installation --set-root-pass ${root_mysql_password}
