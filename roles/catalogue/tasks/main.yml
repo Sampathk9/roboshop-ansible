@@ -11,12 +11,12 @@
     name: roboshop
 
 - name: Remove old app content
-  ansible.builtin.files:
+  ansible.builtin.file:
     path: /app
     state: absent
 
 - name: Create app directory
-  ansible.builtin.files:
+  ansible.builtin.file:
       path: /app
       state: directory
 
