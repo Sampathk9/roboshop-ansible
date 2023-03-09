@@ -1,3 +1,5 @@
+# name in import_role will call that file and executes yml file inside the file/directory mentioned
+
 - name: Import NodeJS
   ansible.builtin.import_role:
     name: common

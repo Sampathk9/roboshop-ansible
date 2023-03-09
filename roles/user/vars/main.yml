@@ -1,2 +1,3 @@
+#component value here will act as a paramter to common file {{component}}
 component: user
 schema_load: true
