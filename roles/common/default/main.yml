@@ -1,0 +1,2 @@
+#Globally we are defining schema_type here and up on here the key will be picked from files
+schema_type: none
