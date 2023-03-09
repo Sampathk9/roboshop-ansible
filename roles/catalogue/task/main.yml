@@ -1,6 +1,5 @@
-- name: Configure NodeJs repos
+- name: Configure NodeJS repos
   ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_lts.x | bash
-
 
 - name: Install NodeJS
   ansible.builtin.yum:
@@ -14,12 +13,12 @@
 - name: Remove old app content
   ansible.builtin.files:
     path: /app
-    states: absent
+    state: absent
 
 - name: Create app directory
   ansible.builtin.files:
       path: /app
-      states: directory
+      state: directory
 
 - name: Download catalogue App content
   ansible.builtin.unarchive:
