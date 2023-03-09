@@ -1,0 +1,4 @@
+#component value here will act as a parameter to common file {{component}}
+component: shipping
+schema_load: true
+schema_type: mysql

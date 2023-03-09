@@ -1,0 +1,7 @@
+# name in import_role will call that file and executes yml file inside the file/directory mentioned
+- name: Import Java
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: java
+
+
