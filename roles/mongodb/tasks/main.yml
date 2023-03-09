@@ -1,0 +1,43 @@
+#source common.sh
+#
+#print_head "Copying MongoDB repo file"
+#cp ${script_location}/Files/mongodb.repo /etc/yum.repos.d/mongodb.repo
+#status_check
+#
+#print_head "Install MondoDb"
+#yum install mongodb-org -y
+#status_check
+#
+#print_head "Updating MongoDB address"
+#sed -i -e 's/127.0.0.1/0.0.0.0/' /etc/mongod.conf
+#status_check
+#
+#print_head "Enable MongoDB"
+#systemctl enable mongod
+#status_check
+#
+#print_head "Restart MongoDB"
+#systemctl restart mongod
+#status_check
+
+- name: Copy mongodb yum repo file
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+
+- name: Install Mongodb server
+  ansible.builtin.yum:
+    name: mongodb-org
+    state: installed
+
+- name: update mongodb listen address
+  ansible.builtin.replace:
+    path: /etc/mongod.conf
+    regexp: '127.0.0.1'
+    replace: '0.0.0.0'
+
+- name: Start MongoDb
+  ansible.builtin.systemd:
+    name: mongod
+    state: restarted
+    enabled: yes
